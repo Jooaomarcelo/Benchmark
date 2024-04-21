@@ -18,7 +18,8 @@
 //void quickSort(int *v, int inicio, int fim);
 //int particiona(int *v, int inicio, int fim);
 
-```c
+//Cabeçalhos com comparações e trocas
+
 //Algoritmo BubbleSort
 //Complexidade: O(n²)
 //Estável: Sim
@@ -57,4 +58,4 @@ int particiona(int *vet, int inicio, int fim, int *compara, int *trocas);
 //Complexidade: O(n logn) para os melhores casos (vetor totalmente aleatório), O(n²) para os piores casos (ordenado)
 //Estável: Não
 void quickSort(int *vet, int inicio, int fim, int *compara, int *trocas);
-```
+
