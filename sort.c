@@ -304,7 +304,7 @@ int particionaDual(int *vet, int inicio, int fim, int *p1, int *compara, int *tr
                 (*trocas)++;
             }
             pos1++;
-        }else{
+        }else if(vet[i] >= pivo2){
             while(i < pos2 && vet[pos2] > pivo2){
                 pos2--;
             }
