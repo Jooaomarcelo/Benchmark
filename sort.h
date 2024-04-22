@@ -51,6 +51,9 @@ void merge(int *vet, int inicio, int meio, int fim, int *compara, int *trocas);
 //Estável: Não
 void mergeSort(int *vet, int inicio, int fim, int *compara, int *trocas);
 
+//Função que fará uma troca no vetor
+void troca(int *v1, int *v2);
+
 //Algoritmo que adiciona o pivô na posição certa dele, e divide o vetor
 int particiona(int *vet, int inicio, int fim, int *compara, int *trocas);
 
@@ -59,3 +62,8 @@ int particiona(int *vet, int inicio, int fim, int *compara, int *trocas);
 //Estável: Não
 void quickSort(int *vet, int inicio, int fim, int *compara, int *trocas);
 
+//Algoritmo particiona com os dois pivot (é o do JAVA.sort())
+int particionaDual(int *vet, int inicio, int fim, int *p1, int *compara, int *trocas);
+
+//Algoritmo Dual Pivot QuickSort
+void quickSortDual(int *vet, int inicio, int fim, int *compara, int *trocas);
