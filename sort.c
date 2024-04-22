@@ -251,26 +251,28 @@ void mergeSort(int *vet, int inicio, int fim, int *compara, int *trocas){
     }
 }
 
+void troca(int *v1, int *v2){
+    int aux = *v1;
+    *v1 = *v2;
+    *v2 = aux;
+}
+
 int particiona(int *vet, int inicio, int fim, int *compara, int *trocas){
-    int pivo = vet[inicio], aux, pos = inicio;
+    int pivo = vet[inicio], pos = inicio;
     for(int i = inicio + 1; i <= fim; i++){
         (*compara)++;
         if(vet[i] < pivo){
             pos++;
             (*compara)++;
             if(pos != i){
-                aux = vet[i];
-                vet[i] = vet[pos];
-                vet[pos] = aux;
+                troca(&vet[i], &vet[pos]);
                 (*trocas)++;
             }
         }
     }
     (*compara)++;
     if(pos != inicio){
-        aux = vet[pos];
-        vet[pos] = vet[inicio];
-        vet[inicio] = aux;
+        troca(&vet[pos], &vet[inicio]);
         (*trocas)++;
     }
     return pos;
@@ -282,5 +284,56 @@ void quickSort(int *vet, int inicio, int fim, int *compara, int *trocas){
         pivo = particiona(vet, inicio, fim, compara, trocas);
         quickSort(vet, inicio, pivo - 1, compara, trocas);
         quickSort(vet, pivo + 1, fim, compara, trocas);
+    }
+}
+
+int particionaDual(int *vet, int inicio, int fim, int *p1, int *compara, int *trocas){
+    int pivo1, pivo2, pos1 = inicio + 1, pos2 = fim - 1;
+    (*compara)++;
+    if(vet[inicio] > vet[fim]){
+        troca(&vet[inicio], &vet[fim]);
+        (*trocas)++;
+    }
+    pivo1 = vet[inicio], pivo2 = vet[fim];
+    for(int i = inicio + 1; i <= pos2; i++){
+        (*compara)++;
+        if(vet[i] < pivo1){
+            (*compara)++;
+            if(i != pos1){
+                troca(&vet[i], &vet[pos1]);
+                (*trocas)++;
+            }
+            pos1++;
+        }else{
+            while(i < pos2 && vet[pos2] > pivo2){
+                pos2--;
+            }
+            troca(&vet[i], &vet[pos2]);
+            pos2--;
+            (*trocas)++;
+            (*compara)++;
+            if(vet[i] < pivo1) {
+                troca(&vet[i], &vet[pos1]);
+                pos1++;
+                (*trocas)++;
+            }
+        }
+    }
+    pos2++;
+    pos1--;
+    troca(&vet[pos1], &vet[inicio]);
+    troca(&vet[pos2], &vet[fim]);
+    (*trocas+=2);
+    *p1 = pos1;
+    return pos2;
+}
+
+void quickSortDual(int *vet, int inicio, int fim, int *compara, int *trocas){
+    int p1, p2;
+    if(inicio < fim){
+        p2 = particionaDual(vet, inicio, fim, &p1, compara, trocas);
+        quickSortDual(vet, inicio, p1 - 1, compara, trocas);
+        quickSortDual(vet, p1 + 1, p2 - 1, compara, trocas);
+        quickSortDual(vet, p2 + 1, fim, compara, trocas);
     }
 }
