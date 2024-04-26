@@ -24,7 +24,7 @@ FILE* abreArquivo(){
     return arquivo;
 }
 
-par* obtemParamentros(){
+par* obtemParametros(){
     par* parametro;
     parametro->tipoOrdenacao = 0;
 
@@ -71,7 +71,7 @@ void geraAmostraSemiOrdenada(par parametro, FILE* arquivo){
             }
 }
 
-void geraAMostraDescrescente(par parametro, FILE* arquivo){
+void geraAmostraDescrescente(par parametro, FILE* arquivo){
     srand(parametro.seed);
     for(int i = parametro.tamAmostra ; i > 0 ; i--){
                 fprintf(arquivo, " %d\n", i);
