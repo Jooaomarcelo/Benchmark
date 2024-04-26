@@ -5,7 +5,7 @@ typedef struct parametros par;
 
 FILE* abreArquivo();
 
-par* obtemParamentros();
+par* obtemParametros();
 
 void geraAmostraAleatoria(par parametro, FILE* arquivo);
 
@@ -13,4 +13,4 @@ void geraAmostraCrescente(par parametro, FILE* arquivo);
 
 void geraAmostraSemiOrdenada(par parametro, FILE* arquivo);
 
-void geraAMostraDescrescente(par parametro, FILE* arquivo);
+void geraAmostraDescrescente(par parametro, FILE* arquivo);
