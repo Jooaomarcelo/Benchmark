@@ -5,12 +5,16 @@ typedef struct parametros par;
 
 FILE* abreArquivo();
 
-par* obtemParametros();
+void obtemParametros(par* parametros);
 
-void geraAmostraAleatoria(par parametro, FILE* arquivo);
+void geraAmostraAleatoria(par* parametro, FILE* arquivo);
 
-void geraAmostraCrescente(par parametro, FILE* arquivo);
+void geraAmostraCrescente(par* parametro, FILE* arquivo);
 
-void geraAmostraSemiOrdenada(par parametro, FILE* arquivo);
+void geraAmostraSemiOrdenada(par* parametro, FILE* arquivo);
 
-void geraAmostraDescrescente(par parametro, FILE* arquivo);
+void geraAmostraDescrescente(par* parametro, FILE* arquivo);
+
+int* criaVetor(FILE* arquivo);
+
+void imprimeVetor(int* vetor, FILE* arquivo);
