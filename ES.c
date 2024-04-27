@@ -14,7 +14,6 @@ vetor *criaVetor(){
 
     printf("\nQual o tamanho do vetor?");
     scanf("%lld", &v->tam);
-    v->tam = 100000;
     v->compara = v->trocas = 0;
 
     return v;
