@@ -9,7 +9,11 @@ long long int *getVet(vetor *v);
 
 long int *getCompara(vetor *v);
 
+void setCompara(vetor *v);
+
 long int *getTrocas(vetor *v);
+
+void setTrocas(vetor *v);
 
 long long int getTam(vetor *v);
 
