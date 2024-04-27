@@ -125,14 +125,12 @@ long long int particiona(long long int *vet, long long int inicio, long long int
         (*compara)++;
         if(vet[i] < pivo){
             pos++;
-            (*compara)++;
             if(pos != i){
                 troca(&vet[i], &vet[pos]);
                 (*trocas)++;
             }
         }
     }
-    (*compara)++;
     if(pos != inicio){
         troca(&vet[pos], &vet[inicio]);
         (*trocas)++;
@@ -164,7 +162,6 @@ long long int particionaDual(long long int *vet, long long int inicio, long long
         (*compara)++;
         if(vet[i] < pivo1){
             pos1++;
-            (*compara)++;
             if(i != pos1){
                 troca(&vet[i], &vet[pos1]);
                 (*trocas)++;
