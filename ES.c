@@ -14,7 +14,6 @@ vetor *criaVetor(){
 
     printf("\nQual o tamanho do vetor?");
     scanf("%lld", &v->tam);
-    v->tam = 100000;
     v->compara = v->trocas = 0;
 
     return v;
@@ -53,17 +52,13 @@ long long int* geraAleatorios(long long int tam, int semente){
     return vet;
 }
 
-long long int* geraQuaseOrdenados(long long int tam, int porcentagem, int semente){
-    long long int *vet = (long long int*)malloc(sizeof(long long int) * tam), tamanho;
-    long double valorPorcentagem = tam * ((long double)porcentagem/100.0);
-
-    tamanho = (int)tam - valorPorcentagem;
-    srand(semente);
+long long int* geraQuaseOrdenados(long long int tam, int porcentagem){
+    long long int *vet = (long long int*)malloc(sizeof(long long int) * tam), valorPorcentagem = (long long int)((long double)tam * ((float)porcentagem/100.0));
     for(long long int i = 0; i < tam; i++){
-        if(i < tamanho){
-            vet[i] = i;
+        if(i < valorPorcentagem){
+            vet[i] = (tam*2) - i;
         }else{
-            vet[i] = rand();
+            vet[i] = i;
         }
     }
     return vet;
@@ -87,7 +82,7 @@ void escolhaOrdenacao(vetor *v, int semente, int tipoOrdenacao, int porcentagem)
     if(tipoOrdenacao == 1){
         v->vet = geraAleatorios(v->tam, semente);
     }else if(tipoOrdenacao == 2){
-        v->vet = geraQuaseOrdenados(v->tam, porcentagem, semente);
+        v->vet = geraQuaseOrdenados(v->tam, porcentagem);
     }else if(tipoOrdenacao == 3){
         v->vet = geraOrdenados(v->tam, 0);
     }else{
