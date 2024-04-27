@@ -56,7 +56,7 @@ long long int* geraQuaseOrdenados(long long int tam, int porcentagem, int sement
     long long int *vet = (long long int*)malloc(sizeof(long long int) * tam), tamanho;
     long double valorPorcentagem = tam * ((long double)porcentagem/100.0);
 
-    tamanho = (int)tam - valorPorcentagem;
+    tamanho = tam - (int)valorPorcentagem;
     srand(semente);
     for(long long int i = 0; i < tam; i++){
         if(i < tamanho){
