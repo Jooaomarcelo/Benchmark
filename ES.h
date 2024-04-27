@@ -1,20 +1,24 @@
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef INC_8_TRABALHO1_ES_H
+#define INC_8_TRABALHO1_ES_H
 
-typedef struct parametros par;
+typedef struct vetor vetor;
 
-FILE* abreArquivo();
+vetor *criaVetor();
 
-void obtemParametros(par* parametros);
+int *getVet(vetor *v);
 
-void geraAmostraAleatoria(par* parametro, FILE* arquivo);
+long int *getCompara(vetor *v);
 
-void geraAmostraCrescente(par* parametro, FILE* arquivo);
+long int *getTrocas(vetor *v);
 
-void geraAmostraSemiOrdenada(par* parametro, FILE* arquivo);
+long long int getTam(vetor *v);
 
-void geraAmostraDescrescente(par* parametro, FILE* arquivo);
+int* geraAleatorios(long long int tam, int semente);
 
-int* criaVetor(FILE* arquivo);
+int* geraQuaseOrdenados(long long int tam, int porcentagem, int semente);
 
-void imprimeVetor(int* vetor, FILE* arquivo);
+int* geraOrdenados(long long int tam, int ordem);
+
+void escolhaOrdenacao(vetor *v);
+
+#endif //INC_8_TRABALHO1_ES_H
