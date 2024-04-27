@@ -12,7 +12,7 @@ long long int getTam(vetor *v);
 
 int* geraAleatorios(long long int tam, int semente);
 
-int* geraQuaseOrdenados(long long int tam, int porcentagem, int semente);
+int* geraQuaseOrdenados(long long int tam, int porcentagem);
 
 int* geraOrdenados(long long int tam, int ordem);
 
