@@ -1,11 +1,10 @@
 #include "sort.h"
 #include <stdlib.h>
-#include <stdio.h>
 
-void bubbleSort(int *vet, int tam, int *compara, int *trocas){
-    int aux;
-    for(int i = 0; i < tam; i++){
-        for(int j = 1; j < tam; j++){
+void bubbleSort(long long int *vet, long long int tam, long int *compara, long int *trocas){
+    long long int aux;
+    for(long long int i = 0; i < tam; i++){
+        for(long long int j = 1; j < tam; j++){
             (*compara)++;
             if(vet[j] < vet[j-1]){
                 aux = vet[j];
@@ -17,10 +16,11 @@ void bubbleSort(int *vet, int tam, int *compara, int *trocas){
     }
 }
 
-void bubbleSortInteligente(int *vet, int tam, int *compara, int *trocas){
-    int aux, ver = 0;
-    for(int i = 0; i < tam && ver == 0; i++){
-        for(int j = 1; j < tam - i; j++){
+void bubbleSortInteligente(long long int *vet, long long int tam, long int *compara, long int *trocas){
+    long long int aux;
+    int ver = 0;
+    for(long long int i = 0; i < tam && ver == 0; i++){
+        for(long long int j = 1; j < tam - i; j++){
             ver = 1;
             (*compara)++;
             if(vet[j] < vet[j-1]){
@@ -34,9 +34,9 @@ void bubbleSortInteligente(int *vet, int tam, int *compara, int *trocas){
     }
 }
 
-int menorElemento(int *vet, int tam, int i, int *compara){
-    int menor = i;
-    for(int j = i + 1; j < tam; j++){
+long long int menorElemento(long long int *vet, long long int tam, long long int i, long int *compara){
+    long long int menor = i;
+    for(long long int j = i + 1; j < tam; j++){
         (*compara)++;
         if(vet[j] < vet[menor]){
             menor = j;
@@ -45,9 +45,9 @@ int menorElemento(int *vet, int tam, int i, int *compara){
     return menor;
 }
 
-void selectionSort(int *vet, int tam, int *compara, int *trocas){
-    int menor, aux;
-    for(int i = 0; i < tam - 1; i++){
+void selectionSort(long long int *vet, long long int tam, long int *compara, long int *trocas){
+    long long int menor, aux;
+    for(long long int i = 0; i < tam - 1; i++){
         menor = menorElemento(vet, tam, i+1, compara);
         (*compara)++;
         if(vet[i] > vet[menor]){
@@ -59,9 +59,9 @@ void selectionSort(int *vet, int tam, int *compara, int *trocas){
     }
 }
 
-void insertionSort(int *vet, int tam, int *compara, int *trocas){
-    int aux, pos;
-    for(int i = 1; i < tam; i++){
+void insertionSort(long long int *vet, long long int tam, long int *compara, long int *trocas){
+    long long int aux, pos;
+    for(long long int i = 1; i < tam; i++){
         pos = i - 1;
         aux = vet[i];
         while(vet[pos] > aux && pos >= 0){
@@ -78,8 +78,10 @@ void insertionSort(int *vet, int tam, int *compara, int *trocas){
     }
 }
 
-void merge(int *vet, int inicio, int meio, int fim, int *compara, int *trocas){
-    int v1 = inicio, v2 = meio+1, *aux = (int*)malloc(sizeof(int) * (fim - inicio + 1)), i = 0;
+void merge(long long int *vet, long long int inicio, long long int meio, long long int fim, long int *compara, long int *trocas){
+    long long int v1 = inicio, v2 = meio+1, i = 0;
+    int *aux = (int*)malloc(sizeof(int) * (fim - inicio + 1));
+
     while(v1 <= meio && v2 <= fim){
         (*compara)++;
         if(vet[v1] < vet[v2]){
@@ -95,15 +97,15 @@ void merge(int *vet, int inicio, int meio, int fim, int *compara, int *trocas){
         aux[i++] = vet[v2++];
     }
     i = 0;
-    for(int j = inicio; j <= fim; j++){
+    for(long long int j = inicio; j <= fim; j++){
         (*trocas)++;
         vet[j] = aux[i++];
     }
     free(aux);
 }
 
-void mergeSort(int *vet, int inicio, int fim, int *compara, int *trocas){
-    int meio = (inicio + fim)/2;
+void mergeSort(long long int *vet, long long int inicio, long long int fim, long int *compara, long int *trocas){
+    long long int meio = (inicio + fim)/2;
     (*compara)++;
     if(inicio < fim){
         mergeSort(vet, inicio, meio, compara, trocas);
@@ -112,15 +114,15 @@ void mergeSort(int *vet, int inicio, int fim, int *compara, int *trocas){
     }
 }
 
-void troca(int *v1, int *v2){
-    int aux = *v1;
+void troca(long long int *v1, long long int *v2){
+    long long int aux = *v1;
     *v1 = *v2;
     *v2 = aux;
 }
 
-int particiona(int *vet, int inicio, int fim, int *compara, int *trocas){
-    int pivo = vet[inicio], pos = inicio;
-    for(int i = inicio + 1; i <= fim; i++){
+long long int particiona(long long int *vet, long long int inicio, long long int fim, long int *compara, long int *trocas){
+    long long int pivo = vet[inicio], pos = inicio;
+    for(long long int i = inicio + 1; i <= fim; i++){
         (*compara)++;
         if(vet[i] < pivo){
             pos++;
@@ -139,8 +141,8 @@ int particiona(int *vet, int inicio, int fim, int *compara, int *trocas){
     return pos;
 }
 
-void quickSort(int *vet, int inicio, int fim, int *compara, int *trocas){
-    int pivo;
+void quickSort(long long int *vet, long long int inicio, long long int fim, long int *compara, long int *trocas){
+    long long int pivo;
     (*compara)++;
     if(inicio < fim){
         pivo = particiona(vet, inicio, fim, compara, trocas);
@@ -149,15 +151,18 @@ void quickSort(int *vet, int inicio, int fim, int *compara, int *trocas){
     }
 }
 
-int particionaDual(int *vet, int inicio, int fim, int *p1, int *compara, int *trocas){
-    int pivo1, pivo2, pos1 = inicio, pos2 = fim;
+long long int particionaDual(long long int *vet, long long int inicio, long long int fim, long long int *p1, long int *compara, long int *trocas){
+    long long int pivo1, pivo2, pos1 = inicio, pos2 = fim;
+
     (*compara)++;
     if(vet[inicio] > vet[fim]){
         troca(&vet[inicio], &vet[fim]);
         (*trocas)++;
     }
+
     pivo1 = vet[inicio], pivo2 = vet[fim];
-    for(int i = inicio + 1; i <= pos2; i++){
+
+    for(long long int i = inicio + 1; i < pos2; i++){
         (*compara)++;
         if(vet[i] < pivo1){
             pos1++;
@@ -190,8 +195,8 @@ int particionaDual(int *vet, int inicio, int fim, int *p1, int *compara, int *tr
     return pos2;
 }
 
-void quickSortDual(int *vet, int inicio, int fim, int *compara, int *trocas){
-    int p1, p2;
+void quickSortDual(long long int *vet, long long int inicio, long long int fim, long int *compara, long int *trocas){
+    long long int p1, p2;
     (*compara)++;
     if(inicio < fim){
         p2 = particionaDual(vet, inicio, fim, &p1, compara, trocas);
