@@ -52,12 +52,11 @@ long long int* geraAleatorios(long long int tam, int semente){
     return vet;
 }
 
-long long int* geraQuaseOrdenados(long long int tam, int porcentagem, int semente){
+long long int* geraQuaseOrdenados(long long int tam, int porcentagem){
     long long int *vet = (long long int*)malloc(sizeof(long long int) * tam), valorPorcentagem = (long long int)((long double)tam * ((float)porcentagem/100.0));
-    srand(semente);
     for(long long int i = 0; i < tam; i++){
         if(i < valorPorcentagem){
-            vet[i] = rand() + tam;
+            vet[i] = (tam*2) - i;
         }else{
             vet[i] = i;
         }
