@@ -2,33 +2,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-struct lista{
-    int tam;
-    int *vet;
-};
-
-lista *cria(){
-    lista *l = (lista*)malloc(sizeof(lista));
-    return l;
-}
-
-int getTam(lista *l){
-    return l->tam;
-}
-
-int *getVet(lista *l){
-    return l->vet;
-}
-
-void preenche(lista *l){
-    int vet[] = {10, 2, 8, 12, 13, 6, 7};
-    l->tam = 7;
-    l->vet = (int*)malloc(sizeof(int) * l->tam);
-    for(int i = 0; i < l->tam; i++){
-        l->vet[i] = vet[i];
-    }
-}
-
 void bubbleSort(int *vet, int tam, int *compara, int *trocas){
     int aux;
     for(int i = 0; i < tam; i++){
