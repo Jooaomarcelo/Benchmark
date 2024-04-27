@@ -106,7 +106,6 @@ void merge(long long int *vet, long long int inicio, long long int meio, long lo
 
 void mergeSort(long long int *vet, long long int inicio, long long int fim, long int *compara, long int *trocas){
     long long int meio = (inicio + fim)/2;
-    (*compara)++;
     if(inicio < fim){
         mergeSort(vet, inicio, meio, compara, trocas);
         mergeSort(vet, meio+1, fim, compara, trocas);
@@ -143,7 +142,6 @@ long long int particiona(long long int *vet, long long int inicio, long long int
 
 void quickSort(long long int *vet, long long int inicio, long long int fim, long int *compara, long int *trocas){
     long long int pivo;
-    (*compara)++;
     if(inicio < fim){
         pivo = particiona(vet, inicio, fim, compara, trocas);
         quickSort(vet, inicio, pivo - 1, compara, trocas);
@@ -197,7 +195,6 @@ long long int particionaDual(long long int *vet, long long int inicio, long long
 
 void quickSortDual(long long int *vet, long long int inicio, long long int fim, long int *compara, long int *trocas){
     long long int p1, p2;
-    (*compara)++;
     if(inicio < fim){
         p2 = particionaDual(vet, inicio, fim, &p1, compara, trocas);
         quickSortDual(vet, inicio, p1 - 1, compara, trocas);
