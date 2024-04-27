@@ -82,7 +82,7 @@ void escolhaOrdenacao(vetor *v, int semente, int tipoOrdenacao, int porcentagem)
     if(tipoOrdenacao == 1){
         v->vet = geraAleatorios(v->tam, semente);
     }else if(tipoOrdenacao == 2){
-        v->vet = geraQuaseOrdenados(v->tam, porcentagem, semente);
+        v->vet = geraQuaseOrdenados(v->tam, porcentagem);
     }else if(tipoOrdenacao == 3){
         v->vet = geraOrdenados(v->tam, 0);
     }else{
