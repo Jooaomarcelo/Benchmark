@@ -80,7 +80,7 @@ Os seguintes testes foram feitos em uma máquina com 16gb RAM, e um processador 
 | 10000 | 0,4 ms | 0,2 ms | 1 ms | 0 ms |
 | 100000 | 3 ms | 2 ms | 11 ms | 10 ms |
 | 500000 | 15,8 ms | 10,6 ms | 50 ms | 49 ms |
-| 1000000 | | | | |
+| 1000000 | 32,2 ms | 21,8 ms | 104 ms | 102 ms |
 
 **Comparações**
 | Entrada | Aleatório | Quase Ordenado | Crescente | Decrescente |
@@ -89,7 +89,7 @@ Os seguintes testes foram feitos em uma máquina com 16gb RAM, e um processador 
 | 10000 | 120.465 | 78.709,2 | 69.008 | 64.608 |
 | 100000 | 1.536.274,2 | 967.811,4 | 853.904 | 815.024 |
 | 500000 | 8.836.969,6 | 5.416.903,6 | 4.783.216 | 4.692.496 |
-| 1000000 | | | | |
+| 1000000 | 18.673.999,8 | 11.383.795,6 | 10.066.432 | 9.884.992 |
 
 **Trocas**
 | Entrada | Aleatório | Quase Ordenado | Crescente | Decrescente |
@@ -98,7 +98,7 @@ Os seguintes testes foram feitos em uma máquina com 16gb RAM, e um processador 
 | 10000 | 133.616 | 133.616 | 133.616 | 133.616 |
 | 100000 | 1.668.928 | 1.668.928 | 1.668.928 | 1.668.928 |
 | 500000 | 9.475.712 | 9.475.712 | 9.475.712 | 9.475.712 |
-| 1000000 | | | | |
+| 1000000 | 19.951.424 | 19.951.424 | 19.951.424 | 19.951.424 |
 
 ## Quick Sort
 
@@ -109,7 +109,7 @@ Os seguintes testes foram feitos em uma máquina com 16gb RAM, e um processador 
 | 10000 | 0,2 ms | 12 ms | 58 ms | 68 ms |
 | 100000 | 1,8 ms | 1,2122 s | 5,735 s | 6,574 s |
 | 500000 | 9,6 ms | 31,0914 s | 2,44 min | 2,83 min |
-| 1000000 | | | | |
+| 1000000 | 21,4 ms | 2,10 min | 9,88 min | 11,47 min |
 
 **Comparações**
 | Entrada | Aleatório | Quase Ordenado | Crescente | Decrescente |
@@ -118,7 +118,7 @@ Os seguintes testes foram feitos em uma máquina com 16gb RAM, e um processador 
 | 10000 | 178.392,2 | 40.516.043,6 | 49.995.000 | 49.995.000 |
 | 100000 | 2.153.783,6 | 4.050.210.949,8 | 4.999.950.000 | 4.999.950.000 |
 | 500000 | 14.222.048 | 101.251.222.062,2 | 124.999.750.000 | 124.999.750.000 |
-| 1000000 | | | | |
+| 1000000 | 35.889.309,8 | 405.002.559.720,4 | 499.999.500.000 | 499.999.500.000 |
 
 **Trocas**
 | Entrada | Aleatório | Quase Ordenado | Crescente | Decrescente |
@@ -127,7 +127,7 @@ Os seguintes testes foram feitos em uma máquina com 16gb RAM, e um processador 
 | 10000 | 74.558,2 | 29.734,8 | 0 | 5.000 |
 | 100000 | 911.051,4 | 342.300,2 | 0 | 50.000 |
 | 500000 | 4.987.082,2 | 1.794.188 | 0 | 250.000 |
-| 1000000 | | | | |
+| 1000000 | 9.746.422,4 | 3.599.359 | 0 | 500.000 |
 
 ## Dual-Pivot Quick Sort
 
@@ -138,7 +138,7 @@ Os seguintes testes foram feitos em uma máquina com 16gb RAM, e um processador 
 | 10000 | 0,2 ms | 0,6 ms | 37 ms | 36 ms |
 | 100000 | 1,6 ms | 50,4 ms | 3,697 s | 3,690 s |
 | 500000 | 9 ms | 1,2988 s | 1,58 min | 1,58 min |
-| 1000000 | | | | |
+| 1000000 | 18,8 ms | 5,2082 s | 6,42 min | 6,43 min |
 
 **Comparações**
 | Entrada | Aleatório | Quase Ordenado | Crescente | Decrescente |
@@ -147,7 +147,7 @@ Os seguintes testes foram feitos em uma máquina com 16gb RAM, e um processador 
 | 10000 | 114.901 | 2.316.967,4 | 25.000.000 | 25.000.000 |
 | 100000 | 1.510.502,4 | 224.189.630,8 | 2.500.000.000 | 2.500.000.000 |
 | 500000 | 8.856.562 | 5.596.488.584,8 | 62.500.000.000 | 62.500.000.000 |
-| 1000000 | | | | |
+| 1000000 | 18.944.000,8 | 22.378.983.277,2 | 250.000.000.000 | 250.000.000.000 |
 
 **Trocas**
 | Entrada | Aleatório | Quase Ordenado | Crescente | Decrescente |
@@ -156,4 +156,4 @@ Os seguintes testes foram feitos em uma máquina com 16gb RAM, e um processador 
 | 10000 | 46.038,2 | 40.412,4 | 0 | 5.000 |
 | 100000 | 617.557 | 436.367,6 | 0 | 50.000 |
 | 500000 | 3.504.305,2 | 2.219.153,2 | 0 | 250.000 |
-| 1000000 | | | | |
+| 1000000 | 7.223.170 | 4.473.716,8 | 0 | 500.000 |
