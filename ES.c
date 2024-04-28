@@ -8,7 +8,7 @@
 
 struct vetor{
     long long int *vet;
-    long int compara, trocas;
+    long long int compara, trocas;
     long long int tam;
 };
 
@@ -19,7 +19,7 @@ struct metricas{
 };
 
 metricas *criaMetricas(){
-    metricas *tabela = (metricas*)malloc(sizeof(metricas) * 7);
+    metricas *tabela = (metricas*)malloc(sizeof(metricas) * 5);
     return tabela;
 }
 
@@ -35,6 +35,10 @@ vetor *criaVetor(){
     return v;
 }
 
+long long int getTam(vetor *v){
+    return v->tam;
+}
+
 void setTam(vetor *v, long long int tam){
     v->tam = tam;
 }
@@ -43,7 +47,7 @@ long long int *getVet(vetor *v){
     return v->vet;
 }
 
-long int *getCompara(vetor *v){
+long long int *getCompara(vetor *v){
     return &v->compara;
 }
 
@@ -51,16 +55,12 @@ void setCompara(vetor *v){
     v->compara = 0;
 }
 
-long int *getTrocas(vetor *v){
+long long int *getTrocas(vetor *v){
     return &v->trocas;
 }
 
 void setTrocas(vetor *v){
     v->trocas = 0;
-}
-
-long long int getTam(vetor *v){
-    return v->tam;
 }
 
 long long int* geraAleatorios(long long int tam, int semente){
