@@ -51,7 +51,7 @@ Os seguintes testes foram feitos em uma máquina com 16gb RAM, e um processador 
 | 10000 | 9,8 ms | 3,6 ms | 0 ms | 97 ms |
 | 100000 | 990 ms | 367 ms | 0 ms | 9,930 s |
 | 500000 | 25,9652 s | 9,5834 s | 1 ms | 4,32 min |
-| 1000000 | | | | |
+| 1000000 | 1,72 min | 38,3634 s  | 2 ms | 17,33 min |
 
 **Comparações**
 | Entrada | Aleatório | Quase Ordenado | Crescente | Decrescente |
@@ -60,7 +60,7 @@ Os seguintes testes foram feitos em uma máquina com 16gb RAM, e um processador 
 | 10000 | 25.074.017,2 | 9.256.450 | 9.999 | 50.004.999 |
 | 100000 | 2.500.283.236,4 | 925.164.017,2 | 99.999 | 5.000.049.999 |
 | 500000 | 62.488.637.630,4 | 23.125.925.867 | 499.999 | 125.000.249.999 |
-| 1000000 | | | | |
+| 1000000 | 249.967.242.525,8 | 92.501.183.236,4 | 999.999 | 500.000.499.999 |
 
 **Trocas**
 | Entrada | Aleatório | Quase Ordenado | Crescente | Decrescente |
@@ -69,7 +69,7 @@ Os seguintes testes foram feitos em uma máquina com 16gb RAM, e um processador 
 | 10000 | 25.074.006,8 | 9.256.442 | 0 | 50.004.999 |
 | 100000 | 2.500.283.221 | 925.164.006,8 | 0 | 5.000.049.999 |
 | 500000 | 62.488.637.600,8 | 23.125.925.854,6 | 0 | 125.000.249.999 |
-| 1000000 | | | | |
+| 1000000 | 249.967.242.479,6 | 92.501.183.221 | 0 | 500.000.499.999 |
 
 ## Merge Sort
 
