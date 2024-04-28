@@ -1,5 +1,9 @@
+#define linhas 5
+#define colunas 4
+
 #include "ES.h"
 #include <stdlib.h>
+#include <time.h>
 #include <stdio.h>
 
 struct vetor{
@@ -8,15 +12,31 @@ struct vetor{
     long long int tam;
 };
 
-//Setando variáveis importantes para o sistema
+struct metricas{
+    double tempo[linhas][colunas];
+    double compara[linhas][colunas];
+    double trocas[linhas][colunas];
+};
+
+metricas *criaMetricas(){
+    metricas *tabela = (metricas*)malloc(sizeof(metricas) * 7);
+    return tabela;
+}
+
+void setTabela(metricas *tabela, int tipo, int entrada, int metodo, double tempo, double comparacoes, double troca){
+    tabela[metodo].tempo[entrada][tipo] = tempo;
+    tabela[metodo].compara[entrada][tipo] = comparacoes;
+    tabela[metodo].trocas[entrada][tipo] = troca;
+}
+
 vetor *criaVetor(){
     vetor *v = (vetor*)malloc(sizeof(vetor));
-
-    printf("\nQual o tamanho do vetor?");
-    scanf("%lld", &v->tam);
     v->compara = v->trocas = 0;
-
     return v;
+}
+
+void setTam(vetor *v, long long int tam){
+    v->tam = tam;
 }
 
 long long int *getVet(vetor *v){
@@ -52,11 +72,13 @@ long long int* geraAleatorios(long long int tam, int semente){
     return vet;
 }
 
-long long int* geraQuaseOrdenados(long long int tam, int porcentagem){
+long long int* geraQuaseOrdenados(long long int tam, int porcentagem, int semente){
     long long int *vet = (long long int*)malloc(sizeof(long long int) * tam), valorPorcentagem = (long long int)((long double)tam * ((float)porcentagem/100.0));
+    //srand(time(NULL));
+    srand(semente);
     for(long long int i = 0; i < tam; i++){
         if(i < valorPorcentagem){
-            vet[i] = (tam*2) - i;
+            vet[i] = rand() + tam;
         }else{
             vet[i] = i;
         }
@@ -79,13 +101,31 @@ long long int* geraOrdenados(long long int tam, int ordem){
 }
 
 void escolhaOrdenacao(vetor *v, int semente, int tipoOrdenacao, int porcentagem){
-    if(tipoOrdenacao == 1){
+    if(tipoOrdenacao == 0){
         v->vet = geraAleatorios(v->tam, semente);
+    }else if(tipoOrdenacao == 1){
+        v->vet = geraQuaseOrdenados(v->tam, porcentagem, semente);
     }else if(tipoOrdenacao == 2){
-        v->vet = geraQuaseOrdenados(v->tam, porcentagem);
-    }else if(tipoOrdenacao == 3){
         v->vet = geraOrdenados(v->tam, 0);
     }else{
         v->vet = geraOrdenados(v->tam, 1);
+    }
+}
+
+void printMatriz(metricas *tabela, int metodo){
+    for(int t = 0; t < 3; t++) {
+        printf("\n\n");
+        for (int i = 0; i < linhas; i++) {
+            for (int j = 0; j < colunas; j++) {
+                if(t == 0){
+                    printf("%lf ", tabela[metodo].tempo[i][j]);
+                }else if(t == 1){
+                    printf("%lf ", tabela[metodo].compara[i][j]);
+                }else{
+                    printf("%lf ", tabela[metodo].trocas[i][j]);
+                }
+            }
+            printf("\n");
+        }
     }
 }
