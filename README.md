@@ -11,7 +11,7 @@ Serão analisados os seguintes algoritmos:
 | **QuickSort** | O(n log<sub>2</sub>(n)) | O(n log<sub>2</sub>(n)) | O(n<sup>2</sup>) |
 | **Dual-Pivot QuickSort** | O(n log<sub>2</sub>(n)) | O(n log<sub>2</sub>(n)) | O(n<sup>2</sup>) |
 
-Os testes foram feitos em um 3.7 GHz Ryzen 5.
+Os seguintes testes foram feitos em um 3.7 GHz Ryzen 5:
 
 ## Selection Sort
 
