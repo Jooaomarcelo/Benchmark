@@ -3,13 +3,13 @@ Benchmark da perfomance de diferentes tipos de algoritmos de ordenação impleme
 
 Serão analisados os seguintes algoritmos:
 
-| Algoritmo | Complexidade Assintótica | Melhor Caso | Pior Caso |
-| --------- | ------------------------ | ----------- | --------- |
-| **Seleção** | O(n<sup>2</sup>) | O(n<sup>2</sup>) | O(n<sup>2</sup>) |
-| **Inserção** | O(n<sup>2</sup>) | O(n) | O(n<sup>2</sup>) |
-| **MergeSort** | O(n log<sub>2</sub>(n)) | O(n log<sub>2</sub>(n)) | O(n log<sub>2</sub>(n)) |
-| **QuickSort** | O(n log<sub>2</sub>(n)) | O(n log<sub>2</sub>(n)) | O(n<sup>2</sup>) |
-| **Dual-Pivot QuickSort** | O(n log<sub>2</sub>(n)) | O(n log<sub>2</sub>(n)) | O(n<sup>2</sup>) |
+| Algoritmo | Melhor Caso | Pior Caso |
+| --------- | ----------- | --------- |
+| **Seleção** | O(n<sup>2</sup>) | O(n<sup>2</sup>) |
+| **Inserção** | O(n) | O(n<sup>2</sup>) |
+| **MergeSort** | O(n log<sub>2</sub>(n)) | O(n log<sub>2</sub>(n)) |
+| **QuickSort** | O(n log<sub>2</sub>(n)) | O(n<sup>2</sup>) |
+| **Dual-Pivot QuickSort** | O(n log<sub>2</sub>(n)) | O(n<sup>2</sup>) |
 
 Os seguintes testes foram feitos em um 3.7 GHz Ryzen 5:
 
