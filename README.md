@@ -9,7 +9,7 @@ Serão analisados os seguintes algoritmos:
 | **Inserção** | O(n) | O(n<sup>2</sup>) |
 | **MergeSort** | O(n log<sub>2</sub>(n)) | O(n log<sub>2</sub>(n)) |
 | **QuickSort** | O(n log<sub>2</sub>(n)) | O(n<sup>2</sup>) |
-| **Dual-Pivot QuickSort** | O(n log<sub>2</sub>(n)) | O(n<sup>2</sup>) |
+| **Dual-Pivot QuickSort** | O(n log<sub>3</sub>(n)) | O(n<sup>2</sup>) |
 
 Os seguintes testes foram feitos em um 3.7 GHz Ryzen 5:
 
