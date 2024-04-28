@@ -21,11 +21,11 @@ void setTabela(metricas *tabela, int tipo, int entrada, int metodo, double tempo
 //Aloca dinamicamente uma variável do tipo vetor.
 vetor *criaVetor();
 
-//Seta o valor do tamanho do vetor para lidar com as diferentes entradas de dados.
-void setTam(vetor *v, long long int tam);
-
 //Retorna o tamanho do vetor.
 long long int getTam(vetor *v);
+
+//Seta o valor do tamanho do vetor para lidar com as diferentes entradas de dados.
+void setTam(vetor *v, long long int tam);
 
 //Retorna o vetor.
 long long int *getVet(vetor *v);
