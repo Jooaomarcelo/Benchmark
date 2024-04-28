@@ -17,6 +17,7 @@ Os testes foram feitos em um 3.7 GHz Ryzen 5.
 
 **Tempo**
 | Entrada | Aleatório | Quase Ordenado | Crescente | Decrescente |
+| ------- | --------- | -------------- | --------- | ----------- |
 | 1000 | 0 ms | 0.2 ms | 0 ms | 1 ms |
 | 10000 | 12.6 ms | 12.6 ms | 63 ms | 67 ms |
 | 100000 | 1.28 s | 1.286 s | 6.461 s | 6.889 s |
