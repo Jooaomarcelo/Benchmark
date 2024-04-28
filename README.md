@@ -22,7 +22,7 @@ Os seguintes testes foram feitos em uma máquina com 16gb RAM, e um processador 
 | 10000 | 12,6 ms | 12,6 ms | 63 ms | 67 ms |
 | 100000 | 1,28 s | 1,286 s | 6,461 s | 6,889 s |
 | 500000 | 33,4448 s | 33,4944 s | 2,76 min | 2,97 min |
-| 1000000 | | | | |
+| 1000000 | 2,27 min | 2,25 min | 11,24 min | 12 min |
 
 **Comparações**
 | Entrada | Aleatório | Quase Ordenado | Crescente | Decrescente |
@@ -31,7 +31,7 @@ Os seguintes testes foram feitos em uma máquina com 16gb RAM, e um processador 
 | 10000 | 49.995.000 | 49.995.000 | 49.995.000 | 49.995.000 |
 | 100000 | 4.999.950.000 | 4.999.950.000 | 4.999.950.000 | 4.999.950.000 |
 | 500000 | 124.999.750.000 | 124.999.750.000 | 124.999.750.000 | 124.999.750.000 |
-| 1000000 | | | | |
+| 1000000 | 499.999.500.000 | 499.999.500.000 | 499.999.500.000 | 499.999.500.000 |
 
 **Trocas**
 | Entrada | Aleatório | Quase Ordenado | Crescente | Decrescente |
@@ -40,7 +40,7 @@ Os seguintes testes foram feitos em uma máquina com 16gb RAM, e um processador 
 | 10000 | 9.990,8 | 9.992 | 0 | 5.000 |
 | 100000 | 99.983,4 | 99.990,8 | 0 | 50.000 |
 | 500000 | 499.971 | 499.988,4 | 0 | 250.000 |
-| 1000000 | | | | |
+| 1000000 | 999.954,6 | 999.983,4 | 0 | 500.000 |
 
 ## Insertion Sort
 
