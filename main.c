@@ -5,7 +5,6 @@
 #include "ES.h"
 #include <stdlib.h>
 #include <time.h>
-#include <stdio.h>
 
 /* FUNÇÕES */
 
@@ -52,18 +51,17 @@ int main(void) {
     metricas *tabela = criaMetricas();
 
     //Entradas 1000 - 10000 - 100000 - 500000 - 1000000
-    entradas = 1000;
+    entradas = 10000;
+
+    //Setando o tamanho do vetor para o tamanho da entrada
+    setTam(v, entradas);
 
     //Metodos 0 - Selection Sort / 1 - Insertion Sort / 2 - Merge Sort / 3 - Quick Sort / 4 - Dual-Pivot Quick Sort
-    metodos = 2;
+    metodos = 4;
 
-    //Tipos: Aleatório - Semi-Ordenado - Crescente - Decrescente
+    //Tipos: 1 Aleatório - 2 Semi-Ordenado - 3 Crescente - 4 Decrescente
     //Percorrendo os tipos
     for(int tipos = 0; tipos < 4; tipos++){
-        printf("Tipo: %d ", tipos);
-
-        //Setando o tamanho do vetor para o tamanho da entrada
-        setTam(v, entradas);
 
         //Setando variáveis auxiliares para a média dos valores
         media = troca = comparacoes = 0;
