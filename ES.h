@@ -45,8 +45,8 @@ void setTrocas(vetor *v);
 //Recebe o tamanho do vetor e uma semente, com isso é gerado um vetor de tam elementos aleatórios.
 long long int* geraAleatorios(long long int tam, int semente);
 
-//Recebe o tamanho do vetor, a porcentagem que estará desordenada e uma semente, com isso é gerado um vetor de tam elementos, a parte desordenada estará no início.
-long long int* geraQuaseOrdenados(long long int tam, int porcentagem, int semente);
+//Recebe o tamanho do vetor e a porcentagem que estará desordenada, com isso é gerado um vetor de tam elementos, a parte desordenada estará no início.
+long long int* geraQuaseOrdenados(long long int tam, int porcentagem);
 
 //Recebe o tamanho de vetor e a ordem, se a ordem for 0 o vetor retornada estará crescente, se for 1 o vetor retornado estará decrescente.
 long long int* geraOrdenados(long long int tam, int ordem);
