@@ -38,7 +38,7 @@ double chamaOrdenacao(vetor *v, int metodos){
             quickSortDual(getVet(v), 0, getTam(v) - 1, getCompara(v), getTrocas(v));
             fim = clock();
     }
-    //Retornando o tempo de execução de respectivo método em mili segundos
+    //Retornando o tempo de execução do respectivo método em mili segundos
     return (double)(fim - inicio)/(CLOCKS_PER_SEC/1000);
 }
 
