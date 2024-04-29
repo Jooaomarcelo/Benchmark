@@ -1,131 +1,123 @@
-/*
-    Código-Fonte para a implementação de um sistema de Benchmark
-    para algoritmos de ordenação.
+/* INCLUDES */
 
-    Grupo: 
-
-    Criado em 14/04/2024
-*/
-
-#include <stdio.h>
-#include <time.h>
-#include "ES.h"
 #include "sort.h"
-/*
-    Include das bibliotecas com funções de entrada e saída
-    e dos algoritmos de ordenação.
-*/
+#include "ES.h"
+#include <stdlib.h>
+#include <time.h>
+#include <stdio.h>
 
-int main() {
-    clock_t inicio, fim;
-    FILE* arquivo;
-    par *params;
-    vet *vetor;
-    char nomeArquivo[31];
-    double t;
-    int controle_criacao=0, controle_ordenacao=0, tipoOrdenacao=0;
-    int trocas=0, compara=0;
+/* FUNÇÕES */
 
-
-    printf("----- Sistema de Benchmark -----\n");
-    printf("O usuário ja possui os arquivos a serem analisados?\n0. Não\n1. Sim\n");
-    scanf(" %d", &controle_criacao);
-    if(controle_criacao == 0) {
-        do {
-            arquivo = abreArquivo(arquivo);
-            params = obtemParametros(params);
-            switch (params->tipoOrdenacao){
-            case 1:
-                geraAmostraAleatoria(params, arquivo);
-                break;
-            
-            case 2:
-                geraAmostraCrescente(params, arquivo);
-                break;
-            
-            case 3:
-                geraAmostraSemiOrdenada(params, arquivo);
-                break;
-            
-            case 4:
-                geraAmostraDescrescente(params, arquivo);
-                break;
-            
-            default:
-                break;
-            }
-
-            fclose(arquivo);
-            printf("Todos os arquivos foram criados?\n0. Não\n1. Sim\n");
-            scanf(" %d", &controle_criacao);
-        } while(controle_criacao == 0);
-    }
-    
-    while(controle_ordenacao == 0){
-        arquivo = abreArquivo(arquivo);
-        vetor = criaVetor(arquivo, vetor);
-        imprimeVetor(vetor->v, vetor->tamanho);
-        printf("Tipo de ordenação que se deseja analisar:\n1. Bolha\n2. Bolha Inteligente\n3. Seleção\n4. Inserção\n5. Merge-Sort\n6. Quick-Sort\n7. Dual-Pivot Quick-Sort");
-        scanf(" %d", &tipoOrdenacao);
-        trocas=0, compara=0;
-        switch (tipoOrdenacao){
+//Função responsável por chamar o respectivo método de ordenação.
+double chamaOrdenacao(vetor *v, int metodos){
+    clock_t inicio, fim; //Variáveis para calcularem o tempo
+    switch (metodos) {
+        case 0:
+            inicio = clock();
+            selectionSort(getVet(v), getTam(v), getCompara(v), getTrocas(v));
+            fim = clock();
+            break;
         case 1:
             inicio = clock();
-
-            bubbleSort(vetor->v, vetor->tamanho, &compara, &trocas);
-
+            insertionSort(getVet(v), getTam(v), getCompara(v), getTrocas(v));
             fim = clock();
-
-            t = ((float)(fim - inicio))/((CLOCKS_PER_SEC/1000));
-            printf("Tempo gasto: %.4fms\nNº de trocas: %d, Nº de comparações: %d\n", t, trocas, compara);
             break;
-        
         case 2:
             inicio = clock();
-
-            bubbleSortInteligente(vetor->v, vetor->tamanho, &compara, &trocas);
-
+            mergeSort(getVet(v), 0, getTam(v) - 1, getCompara(v), getTrocas(v));
             fim = clock();
-            t = ((float)(fim - inicio))/((CLOCKS_PER_SEC/1000));
-            printf("Tempo gasto: %.4fms\nNº de trocas: %d, Nº de comparações: %d\n", t, trocas, compara);
             break;
-
         case 3:
             inicio = clock();
-
-            bubbleSortInteligente(vetor->v, vetor->tamanho, &compara, &trocas);
-
+            quickSort(getVet(v), 0, getTam(v) - 1, getCompara(v), getTrocas(v));
             fim = clock();
-            t = ((float)(fim - inicio))/((CLOCKS_PER_SEC/1000));
-            printf("Tempo gasto: %.4fms\nNº de trocas: %d, Nº de comparações: %d\n", t, trocas, compara);
             break;
-        
-        case 4:
-            inicio = clock();
-
-            bubbleSortInteligente(vetor->v, vetor->tamanho, &compara, &trocas);
-
-            fim = clock();
-            t = ((float)(fim - inicio))/((CLOCKS_PER_SEC/1000));
-            printf("Tempo gasto: %.4fms\nNº de trocas: %d, Nº de comparações: %d\n", t, trocas, compara);
-            break;
-        
-        case 5:
-            inicio = clock();
-
-            bubbleSortInteligente(vetor->v, vetor->tamanho, &compara, &trocas);
-
-            fim = clock();
-            t = ((float)(fim - inicio))/((CLOCKS_PER_SEC/1000));
-            printf("Tempo gasto: %.4fms\nNº de trocas: %d, Nº de comparações: %d\n", t, trocas, compara);
-            break;
-        
         default:
-            break;
-        }
+            inicio = clock();
+            quickSortDual(getVet(v), 0, getTam(v) - 1, getCompara(v), getTrocas(v));
+            fim = clock();
+    }
+    //Retornando o tempo de execução de respectivo método em mili segundos
+    return (double)(fim - inicio)/(CLOCKS_PER_SEC/1000);
+}
 
-        printf("Deseja continuar analisando os tipos de ordenação?\n0. Sim\n1. Não\n");
-        scanf(" %d", &controle_ordenacao);
-    } 
+//Função principal
+int main(void) {
+    long long int entradas;
+    int semente, metodos;
+    long double t, media, comparacoes, troca;
+
+    vetor *v = criaVetor();
+    metricas *tabela = criaMetricas();
+
+    //Entradas 1000 - 10000 - 100000 - 500000 - 1000000
+    printf("Tamanho da entrada: ");
+    scanf(" %lld", &entradas);
+
+    //Metodos 0 - Selection Sort / 1 - Insertion Sort / 2 - Merge Sort / 3 - Quick Sort / 4 - Dual-Pivot Quick Sort
+    printf("Método de ordenação: ");
+    scanf(" %d", &metodos);
+
+    //Tipos: Aleatório - Semi-Ordenado - Crescente - Decrescente
+    //Percorrendo os tipos
+    for(int tipos = 0; tipos < 4; tipos++){
+        printf("Tipo: %d ", tipos);
+
+        //Setando o tamanho do vetor para o tamanho da entrada
+        setTam(v, entradas);
+
+        //Setando variáveis auxiliares para a média dos valores
+        media = troca = comparacoes = 0;
+
+        //Verificando se os dados estarão aleatórios/desordenados
+        if(tipos == 0 || tipos == 1){
+
+            //Calculando a média de 5 execuções
+            for(int i = 0; i < 5; i++){
+
+                //Setando a semente
+                semente = i;
+
+                //Cria vetor
+                escolhaOrdenacao(v, semente, tipos, 10);
+
+                //Chama método de ordenação
+                t = chamaOrdenacao(v, metodos);
+
+                //Preparando para calcular a média
+                media += t;
+                comparacoes += *getCompara(v);
+                troca += *getTrocas(v);
+
+                //Setando variáveis de comparações e trocas para 0
+                setTrocas(v);
+                setCompara(v);
+
+                free(getVet(v));
+            }
+            //Salva a média na matriz
+            setTabela(tabela, tipos, t/5.0, comparacoes/5.0, troca/5.0);
+        }else{
+            //Cria vetor
+            escolhaOrdenacao(v, semente, tipos, 10);
+
+            //Chama método de ordenação
+            t = chamaOrdenacao(v, metodos);
+
+            //Salva os dados na tabela
+            setTabela(tabela, tipos, t, (double)*getCompara(v), (double)*getTrocas(v));
+
+            //Setando variáveis de comparações e trocas para 0
+            setCompara(v);
+            setTrocas(v);
+
+            free(getVet(v));
+        }
+    }
+
+    printVetor(tabela);
+
+    free(v);
+    free(tabela);
     return 0;
 }
