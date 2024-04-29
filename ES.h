@@ -7,7 +7,7 @@
 typedef struct vetor vetor;
 
 //Estrutura que contém 3 vetores, as posições são os tipos de ordenação (Aleatório - Semi-Aleatório - Crescente - Decrescente).
-//O primeira vetor é o de tempo, o segundo é o de trocas, e o último é o de comparações.
+//O primeiro vetor é o de tempo, o segundo é o de trocas, e o último é o de comparações.
 typedef struct metricas metricas;
 
 /* Funções para o gerenciamento dos dados e das estruturas */
@@ -15,7 +15,7 @@ typedef struct metricas metricas;
 //Aloca um vetor do tipo métricas.
 metricas *criaMetricas();
 
-//Na tabela dada, salva os dados do método passado em 3 vetores. A de tempo, comparações, e trocas.
+//Na tabela dada, salva os dados do método passado em 3 vetores. O de tempo, comparações, e trocas.
 void setTabela(metricas *tabela, int tipo, long double tempo, long double comparacoes, long double troca);
 
 //Aloca dinamicamente uma variável do tipo vetor.
