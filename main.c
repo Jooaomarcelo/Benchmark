@@ -50,14 +50,16 @@ int main(void) {
     vetor *v = criaVetor();
     metricas *tabela = criaMetricas();
 
+    printf("--------- Benchmark 1.0 ---------\n\n");
+
     //Entradas 1000 - 10000 - 100000 - 500000 - 1000000
     printf("Tamanho da entrada: ");
     scanf(" %lld", &entradas);
 
     //Metodos 0 - Selection Sort / 1 - Insertion Sort / 2 - Merge Sort / 3 - Quick Sort / 4 - Dual-Pivot Quick Sort
-    printf("Método de ordenação: ");
+    printf("Método de ordenação\n0 - Seleção        1 - Inserção      2 - Merge-Sort\n3 - Quick-Sort        4 - Dual-Pivot Quick-Sort\n");
     scanf(" %d", &metodos);
-
+    printf("\nExecutando ordenações\n");
     //Tipos: Aleatório - Semi-Ordenado - Crescente - Decrescente
     //Percorrendo os tipos
     for(int tipos = 0; tipos < 4; tipos++){
@@ -95,7 +97,7 @@ int main(void) {
 
                 free(getVet(v));
             }
-            //Salva a média na matriz
+            //Salva a média na tabela
             setTabela(tabela, tipos, t/5.0, comparacoes/5.0, troca/5.0);
         }else{
             //Cria vetor

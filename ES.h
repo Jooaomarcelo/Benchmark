@@ -4,7 +4,7 @@
 typedef struct vetor vetor;
 
 //Estrutura que contém 3 vetores, as posições são os tipos de ordenação (Aleatório - Semi-Aleatório - Crescente - Decrescente).
-//O primeira vetor é o de tempo, o segundo é o de trocas, e o último é o de comparações.
+//O primeiro vetor é o de tempo, o segundo é o de trocas, e o último é o de comparações.
 typedef struct metricas metricas;
 
 /* Funções para o gerenciamento dos dados e das estruturas */
@@ -12,7 +12,7 @@ typedef struct metricas metricas;
 //Aloca um vetor do tipo métricas.
 metricas *criaMetricas();
 
-//Na tabela dada, salva os dados do método passado em 3 vetores. A de tempo, comparações, e trocas.
+//Na tabela dada, salva os dados do método passado em 3 vetores. O de tempo, comparações, e trocas.
 void setTabela(metricas *tabela, int tipo, long double tempo, long double comparacoes, long double troca);
 
 //Aloca dinamicamente uma variável do tipo vetor.
@@ -42,8 +42,8 @@ void setTrocas(vetor *v);
 //Recebe o tamanho do vetor e uma semente, com isso é gerado um vetor de tam elementos aleatórios.
 long long int* geraAleatorios(long long int tam, int semente);
 
-//Recebe o tamanho do vetor, a porcentagem que estará desordenada e uma semente, com isso é gerado um vetor de tam elementos, a parte desordenada estará no início.
-long long int* geraQuaseOrdenados(long long int tam, int porcentagem, int semente);
+//Recebe o tamanho do vetor e a porcentagem que estará desordenada, com isso é gerado um vetor de tam elementos, a parte desordenada estará no início.
+long long int* geraQuaseOrdenados(long long int tam, int porcentagem);
 
 //Recebe o tamanho de vetor e a ordem, se a ordem for 0 o vetor retornada estará crescente, se for 1 o vetor retornado estará decrescente.
 long long int* geraOrdenados(long long int tam, int ordem);

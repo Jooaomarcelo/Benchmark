@@ -71,10 +71,9 @@ long long int* geraAleatorios(long long int tam, int semente){
     return vet;
 }
 
-long long int* geraQuaseOrdenados(long long int tam, int porcentagem, int semente){
+long long int* geraQuaseOrdenados(long long int tam, int porcentagem){
     long long int *vet = (long long int*)malloc(sizeof(long long int) * tam), valorPorcentagem = (long long int)((long double)tam * ((float)porcentagem/100.0));
-    //srand(time(NULL));
-    srand(semente);
+    srand(time(NULL));
     for(long long int i = 0; i < tam; i++){
         if(i < valorPorcentagem){
             vet[i] = rand() + tam;
@@ -103,7 +102,7 @@ void escolhaOrdenacao(vetor *v, int semente, int tipoOrdenacao, int porcentagem)
     if(tipoOrdenacao == 0){
         v->vet = geraAleatorios(v->tam, semente);
     }else if(tipoOrdenacao == 1){
-        v->vet = geraQuaseOrdenados(v->tam, porcentagem, semente);
+        v->vet = geraQuaseOrdenados(v->tam, porcentagem);
     }else if(tipoOrdenacao == 2){
         v->vet = geraOrdenados(v->tam, 0);
     }else{
