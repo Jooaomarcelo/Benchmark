@@ -1,4 +1,3 @@
-
 /* INCLUDES */
 
 #include "sort.h"
@@ -38,91 +37,86 @@ double chamaOrdenacao(vetor *v, int metodos){
             quickSortDual(getVet(v), 0, getTam(v) - 1, getCompara(v), getTrocas(v));
             fim = clock();
     }
-    //Retornando o tempo de execução do respectivo método em mili segundos
+    //Retornando o tempo de execução de respectivo método em mili segundos
     return (double)(fim - inicio)/(CLOCKS_PER_SEC/1000);
 }
 
 //Função principal
 int main(void) {
     long long int entradas;
-    int semente, linha;
+    int semente, metodos;
     long double t, media, comparacoes, troca;
 
     vetor *v = criaVetor();
     metricas *tabela = criaMetricas();
 
+    printf("--------- Benchmark 1.0 ---------\n\n");
+
     //Entradas 1000 - 10000 - 100000 - 500000 - 1000000
-    entradas = 1000000;
-    //Linha da entrada na matriz da tabela
-    linha = 3;
+    printf("Tamanho da entrada: ");
+    scanf(" %lld", &entradas);
 
+    //Metodos 0 - Selection Sort / 1 - Insertion Sort / 2 - Merge Sort / 3 - Quick Sort / 4 - Dual-Pivot Quick Sort
+    printf("Método de ordenação\n0 - Seleção        1 - Inserção      2 - Merge-Sort\n3 - Quick-Sort        4 - Dual-Pivot Quick-Sort\n");
+    scanf(" %d", &metodos);
+    printf("\nExecutando ordenações\n");
     //Tipos: Aleatório - Semi-Ordenado - Crescente - Decrescente
+    //Percorrendo os tipos
+    printf("Tipos\n0 - Aleatório    1 - Semi-Ordenado   2 - Crescente   3 - Decrescente\n");
+    for(int tipos = 0; tipos < 4; tipos++){
+        //Setando o tamanho do vetor para o tamanho da entrada
+        setTam(v, entradas);
 
-    //Percorrendo os 5 tipos de métodos de ordenação
-    for(int metodos = 0; metodos < 1; metodos++){
+        //Setando variáveis auxiliares para a média dos valores
+        media = troca = comparacoes = 0;
 
-        printf("\n%d\n", metodos);
+        //Verificando se os dados estarão aleatórios/desordenados
+        if(tipos == 0 || tipos == 1){
 
-        //Percorrendo os tipos
-        for(int tipos = 0; tipos < 4; tipos++){
-            printf("Tipo: %d ", tipos);
+            //Calculando a média de 5 execuções
+            for(int i = 0; i < 5; i++){
 
-            //Setando o tamanho do vetor para o tamanho da entrada
-            setTam(v, entradas);
+                //Setando a semente
+                semente = i;
 
-            //Setando variáveis auxiliares para a média dos valores
-            media = troca = comparacoes = 0;
-
-            //Verificando se os dados estarão aleatórios/desordenados
-            if(tipos == 0 || tipos == 1){
-
-                //Calculando a média de 5 execuções
-                for(int i = 0; i < 5; i++){
-
-                    //Setando a semente
-                    semente = i;
-
-                    //Cria vetor
-                    escolhaOrdenacao(v, semente, tipos, 10);
-
-                    //Chama método de ordenação
-                    t = chamaOrdenacao(v, metodos);
-
-                    //Preparando para calcular a média
-                    media += t;
-                    comparacoes += *getCompara(v);
-                    troca += *getTrocas(v);
-
-                    //Setando variáveis de comparações e trocas para 0
-                    setTrocas(v);
-                    setCompara(v);
-
-                    free(getVet(v));
-                }
-                //Salva a média na matriz
-                setTabela(tabela, tipos, linha, metodos, t/5.0, comparacoes/5.0, troca/5.0);
-            }else{
                 //Cria vetor
                 escolhaOrdenacao(v, semente, tipos, 10);
 
                 //Chama método de ordenação
                 t = chamaOrdenacao(v, metodos);
 
-                //Salva os dados na tabela
-                setTabela(tabela, tipos, linha, metodos, t, (double)*getCompara(v), (double)*getTrocas(v));
+                //Preparando para calcular a média
+                media += t;
+                comparacoes += *getCompara(v);
+                troca += *getTrocas(v);
 
                 //Setando variáveis de comparações e trocas para 0
-                setCompara(v);
                 setTrocas(v);
+                setCompara(v);
 
                 free(getVet(v));
             }
+            //Salva a média na tabela
+            setTabela(tabela, tipos, t/5.0, comparacoes/5.0, troca/5.0);
+        }else{
+            //Cria vetor
+            escolhaOrdenacao(v, semente, tipos, 10);
+
+            //Chama método de ordenação
+            t = chamaOrdenacao(v, metodos);
+
+            //Salva os dados na tabela
+            setTabela(tabela, tipos, t, (double)*getCompara(v), (double)*getTrocas(v));
+
+            //Setando variáveis de comparações e trocas para 0
+            setCompara(v);
+            setTrocas(v);
+
+            free(getVet(v));
         }
     }
 
-    for(int metodos = 0; metodos < 1; metodos++){
-        printMatriz(tabela, metodos);
-    }
+    printVetor(tabela);
 
     free(v);
     free(tabela);
