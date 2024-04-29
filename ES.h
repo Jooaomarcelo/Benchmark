@@ -1,22 +1,19 @@
-#ifndef INC_8_TRABALHO1_ES_H
-#define INC_8_TRABALHO1_ES_H
-
 /* Estruturas para lidar com os dados */
 
 //Estrutura que contém o vetor a ser ordenado/já ordenado, as variáveis de trocas e comparações, e o tamanho do vetor.
 typedef struct vetor vetor;
 
-//Estrutura que contém 3 matrizes, as linhas são as entradas e as colunas os tipos de ordenação (Aleatório - Semi-Aleatório - Crescente - Decrescente).
-//A primeira matriz é a de tempo, a segunda é a de trocas, e a última é a de comparações.
+//Estrutura que contém 3 vetores, as posições são os tipos de ordenação (Aleatório - Semi-Aleatório - Crescente - Decrescente).
+//O primeiro vetor é o de tempo, o segundo é o de trocas, e o último é o de comparações.
 typedef struct metricas metricas;
 
 /* Funções para o gerenciamento dos dados e das estruturas */
 
-//Aloca um vetor de 5 posições do tipo métricas.
+//Aloca um vetor do tipo métricas.
 metricas *criaMetricas();
 
-//Na tabela dada, salva os dados do método passado em 3 matrizes. A de tempo, comparações, e trocas.
-void setTabela(metricas *tabela, int tipo, int entrada, int metodo, long double tempo, long double comparacoes, long double troca);
+//Na tabela dada, salva os dados do método passado em 3 vetores. O de tempo, comparações, e trocas.
+void setTabela(metricas *tabela, int tipo, long double tempo, long double comparacoes, long double troca);
 
 //Aloca dinamicamente uma variável do tipo vetor.
 vetor *criaVetor();
@@ -55,6 +52,4 @@ long long int* geraOrdenados(long long int tam, int ordem);
 void escolhaOrdenacao(vetor *v, int semente, int tipoOrdenacao, int porcentagem);
 
 //Função que imprime na tela as informações das matrizes da estrutura métricas.
-void printMatriz(metricas *tabela, int metodo);
-
-#endif //INC_8_TRABALHO1_ES_H
+void printVetor(metricas *tabela);
