@@ -7,7 +7,7 @@
 typedef struct vetor vetor;
 
 //Estrutura que contém 3 vetores, as posições são os tipos de ordenação (Aleatório - Semi-Aleatório - Crescente - Decrescente).
-//A primeira matriz é a de tempo, a segunda é a de trocas, e a última é a de comparações.
+//O primeira vetor é o de tempo, o segundo é o de trocas, e o último é o de comparações.
 typedef struct metricas metricas;
 
 /* Funções para o gerenciamento dos dados e das estruturas */
