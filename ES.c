@@ -1,5 +1,4 @@
-#define linhas 5
-#define colunas 4
+#define pos 4
 
 #include "ES.h"
 #include <stdlib.h>
@@ -13,20 +12,20 @@ struct vetor{
 };
 
 struct metricas{
-    double tempo[linhas][colunas];
-    double compara[linhas][colunas];
-    double trocas[linhas][colunas];
+    long double tempo[pos];
+    long double compara[pos];
+    long double trocas[pos];
 };
 
 metricas *criaMetricas(){
-    metricas *tabela = (metricas*)malloc(sizeof(metricas) * 5);
+    metricas *tabela = (metricas*)malloc(sizeof(metricas));
     return tabela;
 }
 
-void setTabela(metricas *tabela, int tipo, int entrada, int metodo, double tempo, double comparacoes, double troca){
-    tabela[metodo].tempo[entrada][tipo] = tempo;
-    tabela[metodo].compara[entrada][tipo] = comparacoes;
-    tabela[metodo].trocas[entrada][tipo] = troca;
+void setTabela(metricas *tabela, int tipo, long double tempo, long double comparacoes, long double troca){
+    tabela->tempo[tipo] = tempo;
+    tabela->compara[tipo] = comparacoes;
+    tabela->trocas[tipo] = troca;
 }
 
 vetor *criaVetor(){
@@ -112,20 +111,18 @@ void escolhaOrdenacao(vetor *v, int semente, int tipoOrdenacao, int porcentagem)
     }
 }
 
-void printMatriz(metricas *tabela, int metodo){
+void printVetor(metricas *tabela){
     for(int t = 0; t < 3; t++) {
         printf("\n\n");
-        for (int i = 0; i < linhas; i++) {
-            for (int j = 0; j < colunas; j++) {
-                if(t == 0){
-                    printf("%lf ", tabela[metodo].tempo[i][j]);
-                }else if(t == 1){
-                    printf("%lf ", tabela[metodo].compara[i][j]);
-                }else{
-                    printf("%lf ", tabela[metodo].trocas[i][j]);
-                }
+        for (int j = 0; j < pos; j++) {
+            if(t == 0){
+                printf("%Lf ", tabela->tempo[j]);
+            }else if(t == 1){
+                printf("%Lf ", tabela->compara[j]);
+            }else{
+                printf("%Lf ", tabela->trocas[j]);
             }
-            printf("\n");
         }
+        printf("\n");
     }
 }
