@@ -45,84 +45,76 @@ double chamaOrdenacao(vetor *v, int metodos){
 //Função principal
 int main(void) {
     long long int entradas;
-    int semente, linha;
+    int semente, metodos;
     long double t, media, comparacoes, troca;
 
     vetor *v = criaVetor();
     metricas *tabela = criaMetricas();
 
     //Entradas 1000 - 10000 - 100000 - 500000 - 1000000
-    entradas = 1000000;
-    //Linha da entrada na matriz da tabela
-    linha = 3;
+    entradas = 1000;
+
+    //Metodos 0 - Selection Sort / 1 - Insertion Sort / 2 - Merge Sort / 3 - Quick Sort / 4 - Dual-Pivot Quick Sort
+    metodos = 2;
 
     //Tipos: Aleatório - Semi-Ordenado - Crescente - Decrescente
+    //Percorrendo os tipos
+    for(int tipos = 0; tipos < 4; tipos++){
+        printf("Tipo: %d ", tipos);
 
-    //Percorrendo os 5 tipos de métodos de ordenação
-    for(int metodos = 2; metodos < 5; metodos++){
+        //Setando o tamanho do vetor para o tamanho da entrada
+        setTam(v, entradas);
 
-        printf("\n%d\n", metodos);
+        //Setando variáveis auxiliares para a média dos valores
+        media = troca = comparacoes = 0;
 
-        //Percorrendo os tipos
-        for(int tipos = 0; tipos < 4; tipos++){
-            printf("Tipo: %d ", tipos);
+        //Verificando se os dados estarão aleatórios/desordenados
+        if(tipos == 0 || tipos == 1){
 
-            //Setando o tamanho do vetor para o tamanho da entrada
-            setTam(v, entradas);
+            //Calculando a média de 5 execuções
+            for(int i = 0; i < 5; i++){
 
-            //Setando variáveis auxiliares para a média dos valores
-            media = troca = comparacoes = 0;
+                //Setando a semente
+                semente = i;
 
-            //Verificando se os dados estarão aleatórios/desordenados
-            if(tipos == 0 || tipos == 1){
-
-                //Calculando a média de 5 execuções
-                for(int i = 0; i < 5; i++){
-
-                    //Setando a semente
-                    semente = i;
-
-                    //Cria vetor
-                    escolhaOrdenacao(v, semente, tipos, 10);
-
-                    //Chama método de ordenação
-                    t = chamaOrdenacao(v, metodos);
-
-                    //Preparando para calcular a média
-                    media += t;
-                    comparacoes += *getCompara(v);
-                    troca += *getTrocas(v);
-
-                    //Setando variáveis de comparações e trocas para 0
-                    setTrocas(v);
-                    setCompara(v);
-
-                    free(getVet(v));
-                }
-                //Salva a média na matriz
-                setTabela(tabela, tipos, linha, metodos, t/5.0, comparacoes/5.0, troca/5.0);
-            }else{
                 //Cria vetor
                 escolhaOrdenacao(v, semente, tipos, 10);
 
                 //Chama método de ordenação
                 t = chamaOrdenacao(v, metodos);
 
-                //Salva os dados na tabela
-                setTabela(tabela, tipos, linha, metodos, t, (double)*getCompara(v), (double)*getTrocas(v));
+                //Preparando para calcular a média
+                media += t;
+                comparacoes += *getCompara(v);
+                troca += *getTrocas(v);
 
                 //Setando variáveis de comparações e trocas para 0
-                setCompara(v);
                 setTrocas(v);
+                setCompara(v);
 
                 free(getVet(v));
             }
+            //Salva a média na matriz
+            setTabela(tabela, tipos, t/5.0, comparacoes/5.0, troca/5.0);
+        }else{
+            //Cria vetor
+            escolhaOrdenacao(v, semente, tipos, 10);
+
+            //Chama método de ordenação
+            t = chamaOrdenacao(v, metodos);
+
+            //Salva os dados na tabela
+            setTabela(tabela, tipos, t, (double)*getCompara(v), (double)*getTrocas(v));
+
+            //Setando variáveis de comparações e trocas para 0
+            setCompara(v);
+            setTrocas(v);
+
+            free(getVet(v));
         }
     }
 
-    for(int metodos = 2; metodos < 5; metodos++){
-        printMatriz(tabela, metodos);
-    }
+    printVetor(tabela);
 
     free(v);
     free(tabela);
