@@ -56,16 +56,18 @@ int main(void) {
     printf("Tamanho da entrada: ");
     scanf(" %lld", &entradas);
 
+    //Setando o tamanho do vetor para o tamanho da entrada
+    setTam(v, entradas);
+    
     //Metodos 0 - Selection Sort / 1 - Insertion Sort / 2 - Merge Sort / 3 - Quick Sort / 4 - Dual-Pivot Quick Sort
     printf("Método de ordenação\n0 - Seleção        1 - Inserção      2 - Merge-Sort\n3 - Quick-Sort        4 - Dual-Pivot Quick-Sort\n");
     scanf(" %d", &metodos);
+    
     printf("\nExecutando ordenações\n");
-    //Tipos: Aleatório - Semi-Ordenado - Crescente - Decrescente
-    //Percorrendo os tipos
     printf("Tipos\n0 - Aleatório    1 - Semi-Ordenado   2 - Crescente   3 - Decrescente\n");
+
+    //Percorrendo os tipos
     for(int tipos = 0; tipos < 4; tipos++){
-        //Setando o tamanho do vetor para o tamanho da entrada
-        setTam(v, entradas);
 
         //Setando variáveis auxiliares para a média dos valores
         media = troca = comparacoes = 0;
