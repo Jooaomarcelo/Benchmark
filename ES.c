@@ -1,123 +1,131 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "ES.h"
+#define linhas 5
+#define colunas 4
 
-struct parametros {
-    long long int seed;
-    int tipoOrdenacao;
-    long long int tamAmostra;
+#include "ES.h"
+#include <stdlib.h>
+#include <time.h>
+#include <stdio.h>
+
+struct vetor{
+    long long int *vet;
+    long long int compara, trocas;
+    long long int tam;
 };
 
-FILE* abreArquivo(){
-    FILE* arquivo;
-    char nomeArquivo[31];
-    
-    printf("Digite o nome do arquivo: \n");
-    scanf(" %s", nomeArquivo);
-    arquivo = fopen(nomeArquivo, "w+");
-    
-    if (!arquivo)
-    {
-        printf("Erro ao abrir o arquivo de entrada.\n");
-        return NULL;
+struct metricas{
+    long double tempo[linhas][colunas];
+    long double compara[linhas][colunas];
+    long double trocas[linhas][colunas];
+};
+
+metricas *criaMetricas(){
+    metricas *tabela = (metricas*)malloc(sizeof(metricas) * 5);
+    return tabela;
+}
+
+void setTabela(metricas *tabela, int tipo, int entrada, int metodo, long double tempo, long double comparacoes, long double troca){
+    tabela[metodo].tempo[entrada][tipo] = tempo;
+    tabela[metodo].compara[entrada][tipo] = comparacoes;
+    tabela[metodo].trocas[entrada][tipo] = troca;
+}
+
+vetor *criaVetor(){
+    vetor *v = (vetor*)malloc(sizeof(vetor));
+    v->compara = v->trocas = 0;
+    return v;
+}
+
+long long int getTam(vetor *v){
+    return v->tam;
+}
+
+void setTam(vetor *v, long long int tam){
+    v->tam = tam;
+}
+
+long long int *getVet(vetor *v){
+    return v->vet;
+}
+
+long long int *getCompara(vetor *v){
+    return &v->compara;
+}
+
+void setCompara(vetor *v){
+    v->compara = 0;
+}
+
+long long int *getTrocas(vetor *v){
+    return &v->trocas;
+}
+
+void setTrocas(vetor *v){
+    v->trocas = 0;
+}
+
+long long int* geraAleatorios(long long int tam, int semente){
+    long long int *vet = (long long int*)malloc(sizeof(long long int) * tam);
+    srand(semente);
+    for(long long int i = 0; i < tam; i++){
+        vet[i] = rand();
     }
-
-    return arquivo;
+    return vet;
 }
 
-void obtemParametros(par* parametros){
-    parametros->tipoOrdenacao = 0;
-
-    while (parametros->tipoOrdenacao < 1 || parametros->tipoOrdenacao > 4)
-    {
-        printf("Qual tipo de conjunto de números você deseja que seja criado (1 - Conjunto aleatório, 2 - Conjunto Crescente ,3 - Conjunto Semi-Ordenado, 4 - Conjunto Decrescente)?\n");
-        scanf(" %d", &parametros->tipoOrdenacao);
+long long int* geraQuaseOrdenados(long long int tam, int porcentagem, int semente){
+    long long int *vet = (long long int*)malloc(sizeof(long long int) * tam), valorPorcentagem = (long long int)((long double)tam * ((float)porcentagem/100.0));
+    //srand(time(NULL));
+    srand(semente);
+    for(long long int i = 0; i < tam; i++){
+        if(i < valorPorcentagem){
+            vet[i] = rand() + tam;
+        }else{
+            vet[i] = i;
+        }
     }
+    return vet;
+}
 
-    printf("Qual o tamanho da amostra a ser criada?\n");
-    scanf(" %lld", &parametros->tamAmostra);
-
-    if (parametros->tipoOrdenacao == 1 || parametros->tipoOrdenacao == 3)
-    {
-        printf("Qual a semente da geração de numeros pseudo-aleatorios sera utilizada?\n");
-        scanf(" %lld", &parametros->seed);
-        srand(parametros->seed);
+long long int* geraOrdenados(long long int tam, int ordem){
+    long long int *vet = (long long int*)malloc(sizeof(long long int) * tam);
+    if(ordem == 0){
+        for(long long int i = 0; i < tam; i++){
+            vet[i] = i;
+        }
+    }else if(ordem == 1){
+        for(long long int i = tam, j = 0; i > 0; i--, j++){
+            vet[j] = i;
+        }
     }
-    return;
+    return vet;
 }
 
-void geraAmostraAleatoria(par *parametro, FILE* arquivo){
-    rewind(arquivo);
-    fprintf(arquivo, "%lld\n", parametro->tamAmostra);
-    fprintf(arquivo, "%lld\n", parametro->seed);
-    srand(parametro->seed);
-    for(int i = 0 ; i < parametro->tamAmostra ; i++){
-                fprintf(arquivo, "%d\n", rand());
-            }
+void escolhaOrdenacao(vetor *v, int semente, int tipoOrdenacao, int porcentagem){
+    if(tipoOrdenacao == 0){
+        v->vet = geraAleatorios(v->tam, semente);
+    }else if(tipoOrdenacao == 1){
+        v->vet = geraQuaseOrdenados(v->tam, porcentagem, semente);
+    }else if(tipoOrdenacao == 2){
+        v->vet = geraOrdenados(v->tam, 0);
+    }else{
+        v->vet = geraOrdenados(v->tam, 1);
+    }
 }
 
-void geraAmostraCrescente(par* parametro, FILE* arquivo){
-    rewind(arquivo);
-    fprintf(arquivo, "%lld\n", parametro->tamAmostra);
-    fprintf(arquivo, "%lld\n", parametro->seed);
-    srand(parametro->seed);
-    for(int i=0 ; i<parametro->tamAmostra ; i++){
-                fprintf(arquivo, "%d\n", i);
-            }
-}
-
-void geraAmostraSemiOrdenada(par* parametro, FILE* arquivo){
-    rewind(arquivo);
-    fprintf(arquivo, "%lld\n", parametro->tamAmostra);
-    fprintf(arquivo, "%lld\n", parametro->seed);
-    srand(parametro->seed);
-    for(int i=0 ; i < parametro->tamAmostra ; i++){
-                if (i < parametro->tamAmostra/10){
-                    fprintf(arquivo, "%d\n", rand());
+void printMatriz(metricas *tabela, int metodo){
+    for(int t = 0; t < 3; t++) {
+        printf("\n\n");
+        for (int i = 0; i < linhas; i++) {
+            for (int j = 0; j < colunas; j++) {
+                if(t == 0){
+                    printf("%Lf ", tabela[metodo].tempo[i][j]);
+                }else if(t == 1){
+                    printf("%Lf ", tabela[metodo].compara[i][j]);
                 }else{
-                    fprintf(arquivo, "%d\n", i);
+                    printf("%Lf ", tabela[metodo].trocas[i][j]);
                 }
             }
-}
-
-void geraAmostraDescrescente(par* parametro, FILE* arquivo){
-    rewind(arquivo);
-    fprintf(arquivo, "%lld\n", parametro->tamAmostra);
-    fprintf(arquivo, "%lld\n", parametro->seed);
-    srand(parametro->seed);
-    for(int i = parametro->tamAmostra ; i > 0 ; i--){
-                fprintf(arquivo, "%d\n", i);
-            }
-}
-
-int* criaVetor(FILE* arquivo){
-    int* vetor;
-    long long int tamVetor;
-    long long int seed;
-    rewind(arquivo);
-    fscanf(arquivo, " %lld", &tamVetor);
-    fscanf(arquivo, " %lld", &seed);
-    vetor = (int*)malloc(sizeof(int)*tamVetor);
-    if (!vetor)
-    {
-        printf("Ocorreu um erro durante a alocação do vetor!\n");
-        return NULL;
+            printf("\n");
+        }
     }
-    
-    for(int i=0 ; i < tamVetor ; i++){
-        fscanf(arquivo, " %d", &vetor[i]);
-    }
-    return vetor;
-}
-
-void imprimeVetor(int* vetor, FILE* arquivo){
-    long long int tamVetor;
-    rewind(arquivo);
-    fscanf(arquivo, " %lld", &tamVetor);
-    printf("Vetor = [");
-    for (int i = 0 ; i < tamVetor-1 ; i++)
-    {
-        printf("%d, ", vetor[i]);
-    }
-    printf("%d]\n", vetor[tamVetor-1]);
 }
