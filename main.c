@@ -62,9 +62,8 @@ int main(void) {
     printf("\nExecutando ordenações\n");
     //Tipos: Aleatório - Semi-Ordenado - Crescente - Decrescente
     //Percorrendo os tipos
+    printf("Tipos\n0 - Aleatório    1 - Semi-Ordenado   2 - Crescente   3 - Decrescente\n");
     for(int tipos = 0; tipos < 4; tipos++){
-        printf("Tipo: %d ", tipos);
-
         //Setando o tamanho do vetor para o tamanho da entrada
         setTam(v, entradas);
 
