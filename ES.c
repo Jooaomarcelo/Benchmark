@@ -1,5 +1,4 @@
-#define linhas 5
-#define colunas 4
+#define pos 4
 
 #include "ES.h"
 #include <stdlib.h>
@@ -13,20 +12,20 @@ struct vetor{
 };
 
 struct metricas{
-    long double tempo[linhas][colunas];
-    long double compara[linhas][colunas];
-    long double trocas[linhas][colunas];
+    long double tempo[pos];
+    long double compara[pos];
+    long double trocas[pos];
 };
 
 metricas *criaMetricas(){
-    metricas *tabela = (metricas*)malloc(sizeof(metricas) * 5);
+    metricas *tabela = (metricas*)malloc(sizeof(metricas));
     return tabela;
 }
 
-void setTabela(metricas *tabela, int tipo, int entrada, int metodo, long double tempo, long double comparacoes, long double troca){
-    tabela[metodo].tempo[entrada][tipo] = tempo;
-    tabela[metodo].compara[entrada][tipo] = comparacoes;
-    tabela[metodo].trocas[entrada][tipo] = troca;
+void setTabela(metricas *tabela, int tipo, long double tempo, long double comparacoes, long double troca){
+    tabela->tempo[tipo] = tempo;
+    tabela->compara[tipo] = comparacoes;
+    tabela->trocas[tipo] = troca;
 }
 
 vetor *criaVetor(){
@@ -75,7 +74,6 @@ long long int* geraAleatorios(long long int tam, int semente){
 long long int* geraQuaseOrdenados(long long int tam, int porcentagem){
     long long int *vet = (long long int*)malloc(sizeof(long long int) * tam), valorPorcentagem = (long long int)((long double)tam * ((float)porcentagem/100.0));
     srand(time(NULL));
-    srand(semente);
     for(long long int i = 0; i < tam; i++){
         if(i < valorPorcentagem){
             vet[i] = rand() + tam;
@@ -112,20 +110,18 @@ void escolhaOrdenacao(vetor *v, int semente, int tipoOrdenacao, int porcentagem)
     }
 }
 
-void printMatriz(metricas *tabela, int metodo){
+void printVetor(metricas *tabela){
     for(int t = 0; t < 3; t++) {
         printf("\n\n");
-        for (int i = 0; i < linhas; i++) {
-            for (int j = 0; j < colunas; j++) {
-                if(t == 0){
-                    printf("%Lf ", tabela[metodo].tempo[i][j]);
-                }else if(t == 1){
-                    printf("%Lf ", tabela[metodo].compara[i][j]);
-                }else{
-                    printf("%Lf ", tabela[metodo].trocas[i][j]);
-                }
+        for (int j = 0; j < pos; j++) {
+            if(t == 0){
+                printf("%Lf ", tabela->tempo[j]);
+            }else if(t == 1){
+                printf("%Lf ", tabela->compara[j]);
+            }else{
+                printf("%Lf ", tabela->trocas[j]);
             }
-            printf("\n");
         }
+        printf("\n");
     }
 }
